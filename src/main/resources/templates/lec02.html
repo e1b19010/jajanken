@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>guchokipa</title>
+</head>
+
+<body>
+  <h1>Get Lec02!</h1>
+
+  <div th:if="${yourname}">
+    Hi [[${yourname}]]
+  </div>
+
+  <div>
+    <a href="/janken/gu">ぐー</a>
+    <a href="/janken/cho">ちょき</a>
+    <a href="/janken/pa">ぱー</a>
+    <div th:if="${judge}">
+      あなたの手:[[${you}]]<br>
+      相手の手:[[${enemy}]]<br>
+      結果:[[${judge}]]
+    </div>
+  </div>
+</body>
+
+</html>
