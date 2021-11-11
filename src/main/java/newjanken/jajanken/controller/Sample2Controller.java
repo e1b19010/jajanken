@@ -14,22 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import newjanken.jajanken.model.Entry;
 
 @Controller
-public class SampleController{
+@RequestMapping("/lec02")
+public class Sample2Controller{
 
   @Autowired
   private Entry entry;
-
-  /**
-   * @param model
-   * @param name
-   * @return
-   */
-  @PostMapping("/form")
-  public String form(@RequestParam String name, ModelMap model){
-    String yourname=name;
-    model.addAttribute("yourname",yourname);
-    return "lec02.html";
-  }
 
   @GetMapping("/janken/{hand}")
   public String janken(@PathVariable String hand, ModelMap model){
@@ -47,15 +36,4 @@ public class SampleController{
     model.addAttribute("judge",judge);
     return "lec02.html";
   }
-
-  @GetMapping("/lec02")
-  public String lec02(ModelMap model, Principal prin){
-    String loginUser = prin.getName();
-    this.entry.addUser(loginUser);
-    model.addAttribute("entry",this.entry);
-    model.addAttribute("yourname",loginUser);
-    return "lec02.html";
-  }
-
-
 }
