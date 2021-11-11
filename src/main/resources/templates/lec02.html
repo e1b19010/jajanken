@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>guchokipa</title>
+</head>
+
+<body>
+  <a href="/logout">ログアウト</a>
+  <h1>Get Lec02!</h1>
+
+  <h2>エントリー</h2>
+  <div th:if="${entry}">
+    <li th:each="user :${entry.users}">[[${user}]]</li>
+  </div>
+
+  <div th:if="${yourname}">
+    Hi [[${yourname}]]
+  </div>
+
+  <div>
+    <a href="/lec02/janken/gu">ぐー</a>
+    <a href="/lec02/janken/cho">ちょき</a>
+    <a href="/lec02/janken/pa">ぱー</a>
+    <div th:if="${judge}">
+      あなたの手:[[${you}]]<br>
+      相手の手:[[${enemy}]]<br>
+      結果:[[${judge}]]
+    </div>
+  </div>
+</body>
+
+</html>
