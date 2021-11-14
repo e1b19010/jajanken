@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
 
 <head>
   <meta charset="utf-8">
@@ -11,8 +11,12 @@
   <h1>Get Lec02!</h1>
 
   <h2>エントリー</h2>
-  <div th:if="${entry}">
-    <li th:each="user :${entry.users}">[[${user}]]</li>
+  <div th:each="userlist,stat:${userlist}">
+    <tr>
+      <td>Index:[[${stat.index}]]</td>
+      <td>id:[[${userlist.id}]]</td>
+      <td>name:[[${userlist.name}]]</td>
+    </tr>
   </div>
 
   <div th:if="${yourname}">
@@ -29,6 +33,21 @@
       結果:[[${judge}]]
     </div>
   </div>
+
+  <a href="/lec02/allMatch">matchデータ</a>
+  <div th:each="matchlist,stat:${matchlist}">
+    <tr>
+      <td>Index:[[${stat.index}]]</td>
+      <td>id:[[${matchlist.id}]]</td>
+      <td>user1:[[${matchlist.user1}]]</td>
+      <td>user2:[[${matchlist.user2}]]</td>
+      <td>user1Hand:[[${matchlist.user1Hand}]]</td>
+      <td>user2Hand:[[${matchlist.user2Hand}]]</td>
+    </tr>
+  </div>
+
+  <li th:each="user : ${userlist}"><a th:href="@{/lec02/match(id=${user.id})}"> [[${user.name}]]</a></li>
+
 </body>
 
 </html>

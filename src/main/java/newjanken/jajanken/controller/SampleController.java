@@ -1,9 +1,11 @@
 package newjanken.jajanken.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,12 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import newjanken.jajanken.model.Entry;
+import newjanken.jajanken.model.User;
+import newjanken.jajanken.model.UserMapper;
+import newjanken.jajanken.model.Match;
+import newjanken.jajanken.model.MatchMapper;
 
 @Controller
 public class SampleController{
 
   @Autowired
   private Entry entry;
+
+  @Autowired
+  UserMapper userMapper;
 
   /**
    * @param model
@@ -52,8 +61,12 @@ public class SampleController{
   public String lec02(ModelMap model, Principal prin){
     String loginUser = prin.getName();
     this.entry.addUser(loginUser);
+
     model.addAttribute("entry",this.entry);
     model.addAttribute("yourname",loginUser);
+
+    ArrayList<User> userlist=userMapper.selectAllUser();
+    model.addAttribute("userlist",userlist);
     return "lec02.html";
   }
 
