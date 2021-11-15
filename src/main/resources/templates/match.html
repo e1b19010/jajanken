@@ -7,12 +7,13 @@
 </head>
 
 <body>
-  <a href="/lec02">もどる</a>
 
-  <div th:each="user,stat:${user}">
-    <td>enemy:[[${user.name}]]</td><br>
-    <td>you:[[${yourname}]]</td>
-  </div>
+  <h1>Match</h1>
+  <a th:if="${yourname}">
+    <div th:each="user,stat:${user}">
+      <h2>[[${yourname}]]V.S.[[${user.name}]]</h2>
+    </div>
+  </a>
 
   <div>
     <a href="/lec02/mjanken/gu">ぐー</a>
@@ -24,6 +25,8 @@
       結果:[[${judge}]]
     </div>
   </div>
+
+  <a href="/lec02">もどる</a>
 </body>
 
 </html>

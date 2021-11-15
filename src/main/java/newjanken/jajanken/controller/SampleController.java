@@ -18,6 +18,9 @@ import newjanken.jajanken.model.User;
 import newjanken.jajanken.model.UserMapper;
 import newjanken.jajanken.model.Match;
 import newjanken.jajanken.model.MatchMapper;
+import newjanken.jajanken.model.MatchInfo;
+import newjanken.jajanken.model.MatchInfoMapper;
+
 
 @Controller
 public class SampleController{
@@ -27,6 +30,12 @@ public class SampleController{
 
   @Autowired
   UserMapper userMapper;
+
+  @Autowired
+  MatchMapper matchMapper;
+
+  @Autowired
+  MatchInfoMapper matchInfoMapper;
 
   /**
    * @param model
@@ -67,6 +76,12 @@ public class SampleController{
 
     ArrayList<User> userlist=userMapper.selectAllUser();
     model.addAttribute("userlist",userlist);
+
+    ArrayList<Match> matchlist=matchMapper.selectAllMatch();
+    model.addAttribute("matchlist",matchlist);
+
+    ArrayList<MatchInfo> matchtrue=matchInfoMapper.selectActiveMatch();
+    model.addAttribute("matchtrue",matchtrue);
     return "lec02.html";
   }
 

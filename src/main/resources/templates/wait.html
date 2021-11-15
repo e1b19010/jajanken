@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
+
+<head>
+  <meta charset="utf-8">
+  <title>wait</title>
+</head>
+
+<body>
+  <h1>相手の手を待っています</h1>
+
+  <div th:if="${yourname}">
+    Hi [[${yourname}]]
+  </div>
+
+  <div th:each="matchinfo,stat:${matchinfo}">
+    <tr>
+      <a>試合結果</a>
+      <td>id:[[${matchinfo.id}]]</td>
+      <td>user1:[[${matchinfo.user1}]]</td>
+      <td>user2:[[${matchinfo.user2}]]</td>
+      <td>user1Hand:[[${matchinfo.user1Hand}]]</td>
+    </tr>
+  </div>
+  <a href="/lec02">もどる</a>
+</body>
+</body>

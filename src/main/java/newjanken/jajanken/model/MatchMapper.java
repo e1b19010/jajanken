@@ -18,4 +18,5 @@ public interface MatchMapper{
 
   @Insert("insert into matches (id,user1,user2,user1Hand,user2Hand) values (#{id},#{user1},#{user2},#{user1Hand},#{user2Hand});")
   void insertMatch(Match match);
+
 }

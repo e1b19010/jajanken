@@ -8,5 +8,14 @@ CREATE TABLE matches(
   user1 INT NOT NULL,
   user2 INT NOT NULL,
   user1Hand CHAR,
-  user2Hand CHAR
+  user2Hand CHAR,
+  isActive BOOLEAN
+);
+
+CREATE TABLE matchinfo(
+  id IDENTITY,
+  user1 INT NOT NULL,
+  user2 INT NOT NULL,
+  user1Hand CHAR NOT NULL,
+  isActive BOOLEAN NOT NULL
 );

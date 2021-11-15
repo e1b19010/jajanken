@@ -18,6 +18,8 @@ import newjanken.jajanken.model.User;
 import newjanken.jajanken.model.UserMapper;
 import newjanken.jajanken.model.Match;
 import newjanken.jajanken.model.MatchMapper;
+import newjanken.jajanken.model.MatchInfo;
+import newjanken.jajanken.model.MatchInfoMapper;
 
 @Controller
 @RequestMapping("/lec02")
@@ -31,6 +33,9 @@ public class Sample2Controller{
 
   @Autowired
   MatchMapper matchMapper;
+
+  @Autowired
+  MatchInfoMapper matchInfoMapper;
 
   @GetMapping("/janken/{hand}")
   public String janken(@PathVariable String hand, ModelMap model){
@@ -75,7 +80,7 @@ public class Sample2Controller{
   }
 
   @GetMapping("/mjanken/{hand}")
-  public String mjanken(@PathVariable String hand, ModelMap model){
+  public String mjanken(@PathVariable String hand,ModelMap model,Principal prin){
     String enemy="gu";
     String judge="";
     if(hand.equals("gu")){
@@ -89,15 +94,31 @@ public class Sample2Controller{
     model.addAttribute("enemy",enemy);
     model.addAttribute("judge",judge);
 
-    Match x=new Match();
-    x.setId(4);
-    x.setUser1(1);
-    x.setUser2(2);
-    x.setUser1Hand(hand);
-    x.setUser2Hand(enemy);
+    String loginUser=prin.getName();
+    model.addAttribute("yourname",loginUser);
 
-    matchMapper.insertMatch(x);
+    User user1=userMapper.selectUserIdByName(loginUser);
 
-    return "match.html";
+
+    MatchInfo matchinfo2=new MatchInfo();
+    matchinfo2.setUser1(user1.getId());
+    matchinfo2.setUser2(1);
+    matchinfo2.setUser1Hand(hand);
+    matchinfo2.setIsActive(true);
+    matchInfoMapper.insertMatchInfo(matchinfo2);
+    model.addAttribute("matchinfo",matchinfo2);
+    return "wait.html";
+
+  }
+
+  @PostMapping("matchinfo")
+  @Transactional
+  public String matchinfo(@RequestParam Integer user1id,@RequestParam Integer user2id, ModelMap model, Principal prin){
+    String loginUser=prin.getName();
+    MatchInfo matchinfo=new MatchInfo();
+    matchinfo.setUser1(user1id);
+    matchinfo.setUser2(user2id);
+    model.addAttribute("yourname",loginUser);
+    return "wait.html";
   }
 }
